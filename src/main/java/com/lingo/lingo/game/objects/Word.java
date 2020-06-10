@@ -1,10 +1,9 @@
 package com.lingo.lingo.game.objects;
 
 import java.util.List;
-import java.util.Random;
 
+import com.lingo.lingo.game.Datatransport.ImportSortedWordFile;
 import com.lingo.lingo.game.logic.CheckInputUser;
-import nl.hu.lingo.game.Datatransport.ImportSortedWordFile;
 
 public class Word {
 	

@@ -5,7 +5,6 @@ import com.lingo.lingo.game.Datatransport.ImportHighscoreFile;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class HighscoreList implements Comparable<HighscoreList> {
 	

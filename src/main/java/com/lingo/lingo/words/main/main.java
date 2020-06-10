@@ -1,7 +1,7 @@
 package com.lingo.lingo.words.main;
 
 
-import nl.hu.lingo.words.objects.WordList;
+import com.lingo.lingo.words.objects.WordList;
 
 public class main {
 

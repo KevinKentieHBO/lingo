@@ -5,7 +5,6 @@ import com.lingo.lingo.game.objects.HighscoreList;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
-import java.util.List;
 
 public class ExportHighscoreFile {
 	

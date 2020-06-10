@@ -2,7 +2,6 @@ package com.lingo.lingo.controller;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.lingo.lingo.game.Datatransport.ExportHighscoreFile;
 import com.lingo.lingo.game.objects.HighscoreList;
 import com.lingo.lingo.game.objects.Word;
 import org.springframework.web.bind.annotation.GetMapping;
