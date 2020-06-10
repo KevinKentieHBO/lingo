@@ -12,7 +12,7 @@ public class ExportHighscoreFile {
 		try
 		{
 			PrintWriter pw = new PrintWriter(new FileOutputStream(
-					new File("C:\\Users\\kevin\\Desktop\\lingo\\src\\main\\java\\com\\lingo\\lingo\\game\\Resources\\Highscore\\highscore_"+aantalLetters+".csv"),
+					new File("src/main/java/com/lingo/lingo/game/Resources/Highscore/highscore_"+aantalLetters+".csv"),
 					true /* append = true */));
 			//PrintWriter pr = new PrintWriter("C:\\Users\\kevin\\Desktop\\lingo\\src\\main\\java\\com\\lingo\\lingo\\game\\Resources\\Highscore\\highscore_"+aantalLetters+".csv");
 

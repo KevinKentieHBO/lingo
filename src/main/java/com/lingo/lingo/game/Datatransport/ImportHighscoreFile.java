@@ -11,7 +11,7 @@ public class ImportHighscoreFile {
 
 	public static List<HighscoreList> ReadFile(int wordlength) {
 		try {
-		File file = new File("C:\\Users\\kevin\\Desktop\\lingo\\src\\main\\java\\com\\lingo\\lingo\\game\\Resources\\Highscore\\highscore_"+wordlength+".csv");
+		File file = new File("src/main/java/com/lingo/lingo/game/Resources/Highscore/highscore_"+wordlength+".csv");
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		List<HighscoreList> map = new ArrayList<HighscoreList>();
 		String st;

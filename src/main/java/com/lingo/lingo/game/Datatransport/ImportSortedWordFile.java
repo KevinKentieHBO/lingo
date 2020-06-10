@@ -8,7 +8,7 @@ public class ImportSortedWordFile {
 	
 	public static List ReadFile(int wordLength) {
 		try {
-		File file = new File("C:\\Users\\kevin\\Desktop\\lingo\\src\\main\\java\\com\\lingo\\lingo\\words\\Recources\\filteredFiles\\LingoList_"+wordLength);
+		File file = new File("src/main/java/com/lingo/lingo/words/Recources/filteredFiles/LingoList_"+wordLength);
 		BufferedReader br = new BufferedReader(new FileReader(file)); 
 		List<String> Wordlist = new ArrayList<String>();
 		String st; 
