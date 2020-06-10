@@ -2,8 +2,8 @@ package com.lingo.lingo.game.objects;
 
 import java.util.List;
 
-import com.lingo.lingo.game.Datatransport.ImportSortedWordFile;
-import com.lingo.lingo.game.logic.CheckInputUser;
+import com.lingo.lingo.game.Datatransport.ImportSortedWordFileInterface;
+import com.lingo.lingo.game.logic.CheckInputUserInterface;
 
 public class Word {
 	
@@ -17,7 +17,7 @@ public class Word {
 	}
 	
 	public void setWord(int wordLength) {
-		List<String> wordList = ImportSortedWordFile.ReadFile(wordLength);
+		List<String> wordList = ImportSortedWordFileInterface.ReadFile(wordLength);
 		int randomInteger = 0 + (int)(Math.random() * ((wordList.size() - 0) + 1));
 		exactWord = wordList.get(randomInteger);
 	}
@@ -33,7 +33,7 @@ public class Word {
 	}
 	
 	public List<String> makePlay(String userInput) {
-		List<String> checkList = CheckInputUser.checkWord(userInput, exactWord, wordLength);
+		List<String> checkList = CheckInputUserInterface.checkWord(userInput, exactWord, wordLength);
 		String checkString = "";
 		for(String feedback : checkList) {
 			checkString += "["+feedback+"]";
