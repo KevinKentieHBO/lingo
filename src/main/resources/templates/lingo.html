@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+<head>
+    <style>
+        .myButton {
+            box-shadow:inset 0px 1px 0px 0px #ffffff;
+            background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+            background-color:#ffffff;
+            border-radius:6px;
+            border:1px solid #dcdcdc;
+            display:inline-block;
+            cursor:pointer;
+            color:#666666;
+            font-family:Arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #ffffff;
+        }
+        .myButton:hover {
+            background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+            background-color:#f6f6f6;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+
+        #HighscoreKnop, #HomeKnop{
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            visibility: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: white;
+        }
+
+        .invisible {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        button {
+            margin: auto;
+            background: white;
+            border: 1px solid black;
+            padding: 10px 15px;
+            font-size: 20px;
+        }
+
+        button:hover {
+            background-color: green;
+            color: white;
+        }
+
+        #msgBox {
+            text-align: center;
+            font-size: 3.5em;
+            font-family: 'Arial', sans-serif;
+            margin: 0.1em 0em;
+        }
+
+        #timerdiv, #beurtdiv{
+            text-align: center;
+        }
+
+        @media screen and (max-width: 480px) {
+            #msgBox {
+                font-size: 2.5em;
+            }
+        }
+
+        #smallMsg, #playerWon {
+            text-align: center;
+            padding: 0px 0px 10px 0px;
+            font-size: 1.1em;
+        }
+
+        #guess {
+            border: 1px black solid;
+            padding: 5px;
+            margin: 10px auto;
+            display: block;
+
+        }
+
+        #container {
+            margin: auto;
+            width: 23em;
+        }
+
+        .correct {
+            background: green;
+        }
+
+        .wrongplace {
+            background: yellow;
+        }
+
+        .default {
+            background: #ffff99;
+        }
+
+        .square {
+            vertical-align:top;
+            margin-top: 4px;
+            border: 1px black solid;
+            border-radius: 5px;
+            display: inline-block;
+            height: 1.25em;
+            width: 1.25em;
+            text-align: center;
+            font-size: 3.5em;
+            font-family: 'Lato', sans-serif;
+        }
+
+        #lastSquare{
+            margin-left: 4px;
+        }
+    </style>
+    <title>Kentie Lingo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div id='msgBox'>Guess the word!</div>
+<div id="smallMsg">Groen = juist, Geel = verkeerde plek!</div>
+<div id="timerdiv"><p>Na: <span id="timer">0</span> seconden heb je het woord nog niet gevonden!</p></div>
+<div id="beurtdiv"><p>De beurt duur nog: <span id="beurttimer">0</span> seconden!</p></div>
+<div id="container">
+    <div id="row1">
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+    </div>
+    <div id="row2">
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+    </div>
+    <div id="row3">
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+    </div>
+    <div id="row4">
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+    </div>
+    <div id="row5">
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+        <div class="square default"></div>
+    </div>
+</div>
+<input id="guess" onkeypress="submitguess(this)" placeholder='Type your guess!'>
+<div id="playerWon"></div>
+<div id="HighscoreKnop">
+    <a href="/highscore" class="myButton">Highscore</a>
+</div>
+<div id="HomeKnop">
+    <a href="/frontscreen" class="myButton">Home</a>
+</div>
+
+<script>
+    var input = document.getElementById('guess');
+    var turn = 1;
+    var exactWord = "";
+    var veranderCss = function(cng, old, newClass){
+        cng.className = cng.className.replace(old, newClass);
+    };
+    var timer;
+    var timeLeft = 0;
+    var beurttimer = 10;
+    var eindscore = 60;
+
+
+    //wanneer er op enter wordt geklikt doe hetvolgende
+    input.onkeypress = function(event) {
+        if (event.key == "Enter" || event.keyCode == 13) {
+            makePlay();
+        }
+    };
+
+    function identical(array) {
+        for(var i = 0; i < array.length - 1; i++) {
+            if(array[i]["value"]==("wrong") || array[i]["value"]==("wrong_place")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function endGame(checkdata){
+        console.log(checkdata)
+        if(turn == 6){
+            document.getElementById("guess").style.visibility='hidden';
+            document.getElementById("beurtdiv").style.visibility='hidden';
+            document.getElementById("timerdiv").style.visibility='hidden';
+            document.getElementById("HomeKnop").style.visibility='visible';
+            document.getElementById("HighscoreKnop").style.visibility='visible';
+            clearInterval(timer);
+            document.getElementById("smallMsg").innerText = "Helaas, Het goede woord was: "+exactWord;
+        }
+
+        if(identical(checkdata)){
+            document.getElementById("beurtdiv").style.visibility='hidden';
+            document.getElementById("guess").style.visibility='hidden';
+            document.getElementById("timerdiv").style.visibility='hidden';
+            document.getElementById("HomeKnop").style.visibility='visible';
+            document.getElementById("HighscoreKnop").style.visibility='visible';
+            clearInterval(timer);
+            var h = document.createElement("p");
+            var t = document.createTextNode(sessionStorage.getItem("name") + " Heeft " + eindscore + " punten behaald en het woord in "+ timeLeft + " seconde geraden. Highscore is geplaatst.");
+            h.appendChild(t);
+            document.getElementById("playerWon").append(h);
+            setHighscore();
+        }
+
+        //zet eerste letter op volgende row !!! let op, hier moeten alle goede letters komen!!!
+        document.getElementById("row"+turn).firstElementChild.innerHTML=exactWord[0];
+
+
+    }
+
+    function makePlay() {
+        var checkData = null;
+
+        //haal het ingevulde woord van de speler op en check deze in de backend
+        fetch("http://localhost:8888/wordplay/" + input.value)
+            .then(response => response.json())
+            .then(data => {
+                checkData = data
+            });
+
+        //timeout is door asynchronisch ophalen en fouten voorkomen
+        setTimeout(() => {
+            console.log(checkData);
+        }, 200);
+
+        //geef aan bij welke row je bent door de turn erachter te plakken (row+turn)
+        var childDivs = document.getElementById("row" + turn).getElementsByTagName('div');
+
+        //wanneer de lengte van de input niet vijf is, stop
+        if (input.value.length !== parseInt(sessionStorage.getItem("wordLength"))) {
+            document.getElementById('smallMsg').innerHTML = "Guesses must be " + sessionStorage.getItem("wordLength") + " letters!";
+        } else {
+
+            //vul de sloten van de row in met get geraden woord.
+            for (var i = 0; i < childDivs.length; i++) {
+                childDivs[i].innerHTML = input.value[i];
+            }
+            setTimeout(() => {
+                setColor(checkData, childDivs);
+            }, 200);
+
+            //zet de beurt omhoog
+            turn += 1;
+            beurttimer = 10;
+            eindscore -= 10;
+            //inputvalue leegmaken
+            input.value = "";
+
+            setTimeout(() => {
+                endGame(checkData);
+            }, 200);
+        }
+    }
+
+    //verander de kleur van correcte en verkeerde plaats items
+    function setColor(checklist, childDivs){
+        for(var i = 0; i < checklist["length"]; i++){
+            if(checklist[i]["value"]==("correct")){
+                veranderCss(childDivs[i], 'default', 'correct');
+            }else if(checklist[i]["value"]==("wrong_place")){
+                veranderCss(childDivs[i], 'default', 'wrongplace');
+            }
+        }
+    }
+
+    function updateTimer() {
+        timeLeft = timeLeft + 1;
+        if(timeLeft >= 0)
+            document.getElementById("timer").innerText = timeLeft.toString();
+    }
+
+    function updateBeurtTimer() {
+        beurttimer = beurttimer - 1;
+        if(beurttimer >= 0){
+            document.getElementById("beurttimer").innerText = beurttimer.toString();}
+        else{
+            var emptyrow= exactWord[0];
+            for(var i = 1; i < exactWord.length; i++){
+                emptyrow += "#";
+            }
+            input.value = emptyrow;
+            makePlay();
+            beurttimer = 10;
+        }
+    }
+
+    //haal een random woord op uit de backend
+    function setScreen() {
+
+        if(sessionStorage.getItem("wordLength") == 7){
+            for (var i = 1; i < 6; i++){
+                document.getElementById("row"+i).innerHTML += '<div class="square default"></div>';
+                document.getElementById("row"+i).innerHTML += '<div id="lastSquare" class="square default"></div>';
+                document.getElementById("container").style.width = "34em";
+            }
+        }
+        if(sessionStorage.getItem("wordLength") == 6){
+            for (var i = 1; i < 6; i++){
+                document.getElementById("row"+i).innerHTML += '<div class="square default"></div>';
+                document.getElementById("container").style.width = "30em";
+            }
+        }
+
+        fetch("http://localhost:8888/inputword/"+sessionStorage.getItem("wordLength"))
+            .then(response => response.json())
+            .then(data => exactWord = data["exactword"]);
+
+        setTimeout(() => {  document.getElementById("row1").firstElementChild.innerHTML=exactWord[0]; }, 500);
+
+        timer = setInterval(updateTimer, 1000);
+        timer = setInterval(updateBeurtTimer, 1000);
+        updateTimer();
+    }
+
+    function setHighscore(){
+        fetch("/setHighscore/"+sessionStorage.getItem("name")+"/"+eindscore+"/"+timeLeft+"/"+sessionStorage.getItem("wordLength"))
+    }
+
+    window.onload = setScreen;
+
+
+</script>
+
+</body>
+</html>

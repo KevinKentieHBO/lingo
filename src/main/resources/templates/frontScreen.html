@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kentie Lingo</title>
+    <style>
+        .myButton {
+            box-shadow:inset 0px 1px 0px 0px #ffffff;
+            background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+            background-color:#ffffff;
+            border-radius:6px;
+            border:1px solid #dcdcdc;
+            display:inline-block;
+            cursor:pointer;
+            color:#666666;
+            font-family:Arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #ffffff;
+        }
+        .myButton:hover {
+            background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+            background-color:#f6f6f6;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+
+        .css-input {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 5px;
+            font-size: 16px;
+            border-width: 1px;
+            border-color: #CCCCCC;
+            background-color: #FFFFFF;
+            color: #000000;
+            border-style: solid;
+            border-radius: 0px;
+            box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+            text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+        }
+        .css-input:focus {
+            outline:none;
+        }
+
+        .select {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+            width: 40%;
+        }    .select select {
+                 font-family: 'Arial';
+                 display: inline-block;
+                 width: 100%;
+                 cursor: pointer;
+                 padding: 6px 16px;
+                 outline: 0;
+                 border: 2px solid #000000;
+                 border-radius: 0px;
+                 background: #e6e6e6;
+                 color: #7b7b7b;
+                 appearance: none;
+                 -webkit-appearance: none;
+                 -moz-appearance: none;
+                         text-align: center;
+             }
+        .select select::-ms-expand {
+            display: none;
+        }
+        .select select:hover,
+        .select select:focus {
+            color: #000000;
+            background: #cccccc;
+        }
+        .select select:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .select_arrow {
+            position: absolute;
+            top: 16px;
+            right: 15px;
+            pointer-events: none;
+            border-style: solid;
+            border-width: 8px 5px 0px 5px;
+            border-color: #7b7b7b transparent transparent transparent;
+        }
+        .select select:hover ~ .select_arrow,
+        .select select:focus ~ .select_arrow {
+            border-top-color: #000000;
+        }
+        .select select:disabled ~ .select_arrow {
+            border-top-color: #cccccc;
+        }
+
+        #playerName{
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        #wordLength{
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        #volgKnop, #HighscoreKnop{
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="playerName">
+    <h1>Speler naam:</h1>
+    <input type="text" class="css-input" onChange="nameToSessionState(this);" />
+</div>
+<div id="wordLength">
+    <h1>Selecteer woordlengte:</h1>
+    <div class="select">
+        <select onChange="lengthToSessionState(this);">
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+        </select>
+        <div class="select_arrow">
+        </div>
+</div>
+</div>
+<div id="volgKnop">
+    <a href="/lingo" class="myButton">Start Game</a>
+</div>
+
+<div id="HighscoreKnop">
+    <a href="/highscore" class="myButton">See Highscore</a>
+</div>
+
+<script>
+    function lengthToSessionState(sel){
+        sessionStorage.setItem("wordLength", sel.options[sel.selectedIndex].text);
+    }
+
+    function nameToSessionState(word){
+        sessionStorage.setItem("name", word.value);
+    }
+</script>
+
+</body>
+</html>

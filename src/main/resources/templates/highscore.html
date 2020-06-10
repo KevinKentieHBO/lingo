@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kentie Lingo</title>
+
+    <style>
+        table.blueTable {
+            font-family: "Arial Black", Gadget, sans-serif;
+            border: 3px solid #000000;
+            background-color: #FFFFFF;
+            width: 80%;
+            height: 100px;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        table.blueTable td, table.blueTable th {
+            border: 1px solid #AAAAAA;
+            padding: 3px 2px;
+        }
+        table.blueTable tbody td {
+            font-size: 14px;
+            color: #000000;
+        }
+        table.blueTable tr:nth-child(even) {
+            background: #D0E4F5;
+        }
+        table.blueTable thead {
+            background: #D0DC4D;
+            background: -moz-linear-gradient(top, #dce579 0%, #d4df5e 66%, #D0DC4D 100%);
+            background: -webkit-linear-gradient(top, #dce579 0%, #d4df5e 66%, #D0DC4D 100%);
+            background: linear-gradient(to bottom, #dce579 0%, #d4df5e 66%, #D0DC4D 100%);
+            border-bottom: 2px solid #444444;
+        }
+        table.blueTable thead th {
+            font-size: 15px;
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
+            border-left: 2px solid #D0E4F5;
+        }
+        table.blueTable thead th:first-child {
+            border-left: none;
+        }
+
+        table.blueTable tfoot td {
+            font-size: 14px;
+        }
+        table.blueTable tfoot .links {
+            text-align: right;
+        }
+        table.blueTable tfoot .links a{
+            display: inline-block;
+            background: #1C6EA4;
+            color: #FFFFFF;
+            padding: 2px 8px;
+            border-radius: 5px;
+        }
+
+        #Highscore_5, #Highscore_6, #Highscore_7{
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        table{
+            text-align: center;
+            margin-left: 10%;
+        }
+
+        .myButton {
+            box-shadow:inset 0px 1px 0px 0px #ffffff;
+            background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+            background-color:#ffffff;
+            border-radius:6px;
+            border:1px solid #dcdcdc;
+            display:inline-block;
+            cursor:pointer;
+            color:#666666;
+            font-family:Arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #ffffff;
+        }
+        .myButton:hover {
+            background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+            background-color:#f6f6f6;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+
+        #BackKnop{
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="Highscore_5">
+    <h1>Highscore 5 letter woord:</h1>
+<table id="5_letter" class="blueTable">
+    <thead>
+    <tr>
+        <th>Positie</th>
+        <th>Naam</th>
+        <th>Score</th>
+        <th>Tijd</th>
+    </tr>
+    </thead>
+    <tbody id="tbody_5">
+    <tr>
+
+    </tr>
+    </tbody>
+    </tr>
+</table>
+</div>
+<div id="Highscore_6">
+    <h1>Highscore 6 letter woord:</h1>
+<table id="6_letter" class="blueTable">
+    <thead>
+    <tr>
+        <th>Positie</th>
+        <th>Naam</th>
+        <th>Score</th>
+        <th>Tijd</th>
+    </tr>
+    </thead>
+    <tbody id="tbody_6">
+    <tr>
+
+    </tr>
+    </tbody>
+    </tr>
+</table>
+</div>
+<div id="Highscore_7">
+    <h1>Highscore 7 letter woord:</h1>
+<table id="7_letter" class="blueTable">
+    <thead>
+    <tr>
+        <th>Positie</th>
+        <th>Naam</th>
+        <th>Score</th>
+        <th>Tijd</th>
+    </tr>
+    </thead>
+    <tbody id="tbody_7">
+    <tr>
+    </tbody>
+    </tr>
+</table>
+</div>
+<div id="BackKnop">
+    <a href="/frontscreen" class="myButton">Back</a>
+</div>
+<script>
+    var wordScore_5 = null;
+    var wordScore_6 = null;
+    var wordScore_7 = null;
+
+    function init() {
+        fetch("http://localhost:8888/highscore/5")
+            .then(response => response.json())
+            .then(data => wordScore_5 = data);
+        fetch("http://localhost:8888/highscore/6")
+            .then(response => response.json())
+            .then(data => wordScore_6 = data);
+        fetch("http://localhost:8888/highscore/7")
+            .then(response => response.json())
+            .then(data => wordScore_7 = data);
+
+        setTimeout(() => {
+            for(var i = 0; i < wordScore_5["length"]; i++){
+                var tableRef = document.getElementById('5_letter').getElementsByTagName('tbody')[0];
+                var newRow   = tableRef.insertRow();
+                var newCell  = newRow.insertCell(0);
+                var newCell1  = newRow.insertCell(0);
+                var newCell2  = newRow.insertCell(0);
+                var newCell3  = newRow.insertCell(0);
+                var newText  = document.createTextNode(wordScore_5[i]["positie"]);
+                var newText1  = document.createTextNode(wordScore_5[i]["name"]);
+                var newText2  = document.createTextNode(wordScore_5[i]["score"]);
+                var newText3  = document.createTextNode(wordScore_5[i]["time"]);
+                newCell.appendChild(newText3);
+                newCell1.appendChild(newText2);
+                newCell2.appendChild(newText1);
+                newCell3.appendChild(newText);
+            }
+        }, 200);
+
+        setTimeout(() => {
+            for(var i = 0; i < wordScore_6["length"]; i++){
+                var tableRef = document.getElementById('6_letter').getElementsByTagName('tbody')[0];
+                var newRow   = tableRef.insertRow();
+                var newCell  = newRow.insertCell(0);
+                var newCell1  = newRow.insertCell(0);
+                var newCell2  = newRow.insertCell(0);
+                var newCell3  = newRow.insertCell(0);
+                var newText  = document.createTextNode(wordScore_6[i]["positie"]);
+                var newText1  = document.createTextNode(wordScore_6[i]["name"]);
+                var newText2  = document.createTextNode(wordScore_6[i]["score"]);
+                var newText3  = document.createTextNode(wordScore_6[i]["time"]);
+                newCell.appendChild(newText3);
+                newCell1.appendChild(newText2);
+                newCell2.appendChild(newText1);
+                newCell3.appendChild(newText);
+            }
+        }, 200);
+
+        setTimeout(() => {
+            for(var i = 0; i < wordScore_7["length"]; i++){
+                var tableRef = document.getElementById('7_letter').getElementsByTagName('tbody')[0];
+                var newRow   = tableRef.insertRow();
+                var newCell  = newRow.insertCell(0);
+                var newCell1  = newRow.insertCell(0);
+                var newCell2  = newRow.insertCell(0);
+                var newCell3  = newRow.insertCell(0);
+                var newText  = document.createTextNode(wordScore_7[i]["positie"]);
+                var newText1  = document.createTextNode(wordScore_7[i]["name"]);
+                var newText2  = document.createTextNode(wordScore_7[i]["score"]);
+                var newText3  = document.createTextNode(wordScore_7[i]["time"]);
+                newCell.appendChild(newText3);
+                newCell1.appendChild(newText2);
+                newCell2.appendChild(newText1);
+                newCell3.appendChild(newText);
+            }
+        }, 200);
+
+    }
+
+    window.onload = init;
+
+</script>
+</body>
+</html>
