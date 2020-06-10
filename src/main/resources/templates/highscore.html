@@ -165,13 +165,13 @@
     var wordScore_7 = null;
 
     function init() {
-        fetch("http://localhost:8888/highscore/5")
+        fetch(window.location.protocol+"//"+window.location.hostname+"/highscore/5")
             .then(response => response.json())
             .then(data => wordScore_5 = data);
-        fetch("http://localhost:8888/highscore/6")
+        fetch(window.location.protocol +"//"+window.location.hostname+"/highscore/6")
             .then(response => response.json())
             .then(data => wordScore_6 = data);
-        fetch("http://localhost:8888/highscore/7")
+        fetch(window.location.protocol +"//"+window.location.hostname+"/highscore/7")
             .then(response => response.json())
             .then(data => wordScore_7 = data);
 
