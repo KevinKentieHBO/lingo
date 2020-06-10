@@ -246,7 +246,7 @@
         var checkData = null;
 
         //haal het ingevulde woord van de speler op en check deze in de backend
-        fetch("http://localhost:8888/wordplay/" + input.value)
+        fetch(window.location.protocol +"//"+window.location.host+"/wordplay/" + input.value)
             .then(response => response.json())
             .then(data => {
                 checkData = data
@@ -335,7 +335,7 @@
             }
         }
 
-        fetch("http://localhost:8888/inputword/"+sessionStorage.getItem("wordLength"))
+        fetch(window.location.protocol +"//"+window.location.host+"/inputword/"+sessionStorage.getItem("wordLength"))
             .then(response => response.json())
             .then(data => exactWord = data["exactword"]);
 
@@ -347,7 +347,7 @@
     }
 
     function setHighscore(){
-        fetch("/setHighscore/"+sessionStorage.getItem("name")+"/"+eindscore+"/"+timeLeft+"/"+sessionStorage.getItem("wordLength"))
+        fetch(window.location.protocol +"//"+window.location.host+"/setHighscore/"+sessionStorage.getItem("name")+"/"+eindscore+"/"+timeLeft+"/"+sessionStorage.getItem("wordLength"))
     }
 
     window.onload = setScreen;
