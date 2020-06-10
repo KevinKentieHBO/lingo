@@ -1,4 +1,4 @@
-package nl.hu.lingo.game.objects;
+package com.lingo.lingo.game.objects;
 
 public class Player {
 	

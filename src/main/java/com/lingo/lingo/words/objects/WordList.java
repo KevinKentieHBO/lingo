@@ -1,12 +1,12 @@
-package nl.hu.lingo.words.objects;
+package com.lingo.lingo.words.objects;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lingo.lingo.words.Datatransport.ExportSortedWordFile;
+import com.lingo.lingo.words.Datatransport.ImportBaseWordFile;
 import org.omg.DynamicAny.DynAnyPackage.InvalidValue;
 
-import nl.hu.lingo.words.Datatransport.ExportSortedWordFile;
-import nl.hu.lingo.words.Datatransport.ImportBaseWordFile;
 
 public class WordList {
 	

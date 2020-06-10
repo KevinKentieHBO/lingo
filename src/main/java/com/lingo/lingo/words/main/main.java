@@ -1,4 +1,4 @@
-package nl.hu.lingo.words.main;
+package com.lingo.lingo.words.main;
 
 
 import nl.hu.lingo.words.objects.WordList;
