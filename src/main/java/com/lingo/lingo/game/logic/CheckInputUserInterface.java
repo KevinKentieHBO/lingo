@@ -5,5 +5,4 @@ import java.util.List;
 
 public interface CheckInputUserInterface {
     List<String> checkWord(String userInput, String exactWord, int wordLength);
-
 }

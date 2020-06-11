@@ -50,8 +50,13 @@ public class HighscoreList implements Comparable<HighscoreList> {
 		return this.getPlayerScore() - o.getPlayerScore();
 	}
 
-	public void exportHighscore(HighscoreList hs, int wordLength){
-		ExportHighscoreFileInterface exportHighscoreFileI = new ExportHighscoreFile();
-		exportHighscoreFileI.exportHighscoreList(hs, wordLength);
+	public Boolean exportHighscore(HighscoreList hs, int wordLength){
+		try {
+			ExportHighscoreFileInterface exportHighscoreFileI = new ExportHighscoreFile();
+			exportHighscoreFileI.exportHighscoreList(hs, wordLength);
+			return true;
+		}catch (Exception e){
+			return false;
+		}
 	}
 }

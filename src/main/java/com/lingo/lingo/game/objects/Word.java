@@ -25,16 +25,6 @@ public class Word {
 		exactWord = wordList.get(randomInteger);
 	}
 	
-	public String beginWord() {
-		
-		String wordInPlay = Character.toString(exactWord.charAt(0));
-		for(int i = 0; i < wordLength; i+=1) {
-			wordInPlay += "_";
-		}
-		return wordInPlay;
-		
-	}
-	
 	public List<String> makePlay(String userInput) {
 		CheckInputUserInterface checkInputUserI = new CheckInputUser();
 		List<String> checkList = checkInputUserI.checkWord(userInput, exactWord, wordLength);
@@ -42,7 +32,6 @@ public class Word {
 		for(String feedback : checkList) {
 			checkString += "["+feedback+"]";
 		}
-		System.out.println();
 		String wordInPlay = "";
 		for(int i = 0; i < wordLength; i+=1) {
 			if(checkList.get(i).equals("correct")) {
@@ -52,11 +41,10 @@ public class Word {
 				wordInPlay += "_";
 			}
 		}
+
 		System.out.println(checkString);
 		System.out.println(wordInPlay);
 
 		return checkList;
-		
 	}
-	
 }
