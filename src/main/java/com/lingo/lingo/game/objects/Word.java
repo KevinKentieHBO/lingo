@@ -3,6 +3,7 @@ package com.lingo.lingo.game.objects;
 import java.util.List;
 
 import com.lingo.lingo.game.Datatransport.ImportSortedWordFileInterface;
+import com.lingo.lingo.game.logic.CheckInputUser;
 import com.lingo.lingo.game.logic.CheckInputUserInterface;
 
 public class Word {
@@ -33,7 +34,8 @@ public class Word {
 	}
 	
 	public List<String> makePlay(String userInput) {
-		List<String> checkList = CheckInputUserInterface.checkWord(userInput, exactWord, wordLength);
+		CheckInputUserInterface checkInputUserI = new CheckInputUser();
+		List<String> checkList = checkInputUserI.checkWord(userInput, exactWord, wordLength);
 		String checkString = "";
 		for(String feedback : checkList) {
 			checkString += "["+feedback+"]";
