@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lingo.lingo.words.Datatransport.ExportSortedWordFile;
+import com.lingo.lingo.words.Datatransport.ExportSortedWordFileInterface;
 import com.lingo.lingo.words.Datatransport.ImportBaseWordFile;
+import com.lingo.lingo.words.Datatransport.ImportBaseWordFileInterface;
 
 
 public class WordList {
@@ -22,7 +24,8 @@ public class WordList {
 	}
 	
 	public void importBaseList(){
-		wordList = ImportBaseWordFile.ReadFile();
+		ImportBaseWordFileInterface importBaseWordFileI = new ImportBaseWordFile();
+		wordList = importBaseWordFileI.ReadFile();
 	}
 	
 	public void shapeWordListToSize() {
@@ -36,6 +39,7 @@ public class WordList {
 	}
 	
 	public void exportSortedWordFile() {
-		ExportSortedWordFile.exportSortedList(wordList, wordSize);
+		ExportSortedWordFileInterface exportSortedWordFileI = new ExportSortedWordFile();
+		exportSortedWordFileI.exportSortedList(wordList, wordSize);
 	}
 }
