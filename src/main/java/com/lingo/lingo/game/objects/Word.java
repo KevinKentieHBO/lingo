@@ -2,6 +2,7 @@ package com.lingo.lingo.game.objects;
 
 import java.util.List;
 
+import com.lingo.lingo.game.Datatransport.ImportSortedWordFile;
 import com.lingo.lingo.game.Datatransport.ImportSortedWordFileInterface;
 import com.lingo.lingo.game.logic.CheckInputUser;
 import com.lingo.lingo.game.logic.CheckInputUserInterface;
@@ -18,7 +19,8 @@ public class Word {
 	}
 	
 	public void setWord(int wordLength) {
-		List<String> wordList = ImportSortedWordFileInterface.ReadFile(wordLength);
+		ImportSortedWordFileInterface importSortedWordFileI = new ImportSortedWordFile();
+		List<String> wordList = importSortedWordFileI.ReadFile(wordLength);
 		int randomInteger = 0 + (int)(Math.random() * ((wordList.size() - 0) + 1));
 		exactWord = wordList.get(randomInteger);
 	}

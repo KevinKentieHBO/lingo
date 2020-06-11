@@ -1,6 +1,8 @@
 package com.lingo.lingo.game.objects;
 
+import com.lingo.lingo.game.Datatransport.ExportHighscoreFile;
 import com.lingo.lingo.game.Datatransport.ExportHighscoreFileInterface;
+import com.lingo.lingo.game.Datatransport.ImportHighscoreFile;
 import com.lingo.lingo.game.Datatransport.ImportHighscoreFileInterface;
 
 import java.util.ArrayList;
@@ -37,7 +39,8 @@ public class HighscoreList implements Comparable<HighscoreList> {
 	}
 
 	public List<HighscoreList> getTop10(int wordLength){
-		fullHighscoreList = ImportHighscoreFileInterface.ReadFile(wordLength);
+		ImportHighscoreFileInterface importHighscoreFileI = new ImportHighscoreFile();
+		fullHighscoreList = importHighscoreFileI.ReadFile(wordLength);
 		List<HighscoreList> top10 = new ArrayList<HighscoreList>(fullHighscoreList.subList(fullHighscoreList.size() -10, fullHighscoreList.size()));
 		return top10;
 	}
@@ -48,6 +51,7 @@ public class HighscoreList implements Comparable<HighscoreList> {
 	}
 
 	public void exportHighscore(HighscoreList hs, int wordLength){
-		ExportHighscoreFileInterface.exportHighscoreList(hs, wordLength);
+		ExportHighscoreFileInterface exportHighscoreFileI = new ExportHighscoreFile();
+		exportHighscoreFileI.exportHighscoreList(hs, wordLength);
 	}
 }
