@@ -36,14 +36,6 @@ public class HighscoreList implements Comparable<HighscoreList> {
 		return highscoretime;
 	}
 
-	public List<HighscoreList> getFullHighscoreList() {
-		return fullHighscoreList;
-	}
-
-	public void addToFullList(HighscoreList row){
-		fullHighscoreList.add(row);
-	}
-
 	public List<HighscoreList> getTop10(int wordLength){
 		fullHighscoreList = ImportHighscoreFileInterface.ReadFile(wordLength);
 		List<HighscoreList> top10 = new ArrayList<HighscoreList>(fullHighscoreList.subList(fullHighscoreList.size() -10, fullHighscoreList.size()));
