@@ -9,19 +9,21 @@ import java.io.PrintWriter;
 public class ExportHighscoreFile implements ExportHighscoreFileInterface {
 
     public void exportHighscoreList(HighscoreList hg, int aantalLetters) throws Exception {
+        PrintWriter pw = null;
         try
         {
-            PrintWriter pw = new PrintWriter(new FileOutputStream(
+            pw = new PrintWriter(new FileOutputStream(
                     new File("src/main/java/com/lingo/lingo/game/Resources/Highscore/highscore_"+aantalLetters+".csv"),
                     true /* append = true */));
 
             pw.println(hg.getPlayerName()+","+hg.getPlayerScore()+","+hg.getHighscoretime());
 
-            pw.close();
         }
         catch(Exception e) {
             e.printStackTrace();
             throw new Exception("exporteren van de HighscoreList is niet gelukt");
+        } finally {
+            pw.close();
         }
     }
 
