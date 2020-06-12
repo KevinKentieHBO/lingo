@@ -38,11 +38,16 @@ public class HighscoreList implements Comparable<HighscoreList> {
 		return highscoretime;
 	}
 
-	public List<HighscoreList> getTop10(int wordLength){
+	public List<HighscoreList> getTop10(int wordLength) throws Exception {
 		ImportHighscoreFileInterface importHighscoreFileI = new ImportHighscoreFile();
-		fullHighscoreList = importHighscoreFileI.ReadFile(wordLength);
-		List<HighscoreList> top10 = new ArrayList<HighscoreList>(fullHighscoreList.subList(fullHighscoreList.size() -10, fullHighscoreList.size()));
-		return top10;
+		try {
+			fullHighscoreList = importHighscoreFileI.ReadFile(wordLength);
+			List<HighscoreList> top10 = new ArrayList<HighscoreList>(fullHighscoreList.subList(fullHighscoreList.size() - 10, fullHighscoreList.size()));
+			return top10;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception("HighscoreList kan niet gesorteerd worden naar een top 10 lijst");
+		}
 	}
 
 	@Override
@@ -50,13 +55,14 @@ public class HighscoreList implements Comparable<HighscoreList> {
 		return this.getPlayerScore() - o.getPlayerScore();
 	}
 
-	public Boolean exportHighscore(HighscoreList hs, int wordLength){
+	public Boolean exportHighscore(HighscoreList hs, int wordLength) throws Exception {
 		try {
 			ExportHighscoreFileInterface exportHighscoreFileI = new ExportHighscoreFile();
 			exportHighscoreFileI.exportHighscoreList(hs, wordLength);
 			return true;
-		}catch (Exception e){
-			return false;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception("Exporteren van de Highscore wordt niet mogelijk gemaakt door HighscoreList object");
 		}
 	}
 }

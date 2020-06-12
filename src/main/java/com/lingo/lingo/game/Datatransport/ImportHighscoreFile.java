@@ -9,7 +9,7 @@ import com.lingo.lingo.game.objects.HighscoreList;
 
 public class ImportHighscoreFile implements ImportHighscoreFileInterface {
 
-    public List<HighscoreList> ReadFile(int wordlength) {
+    public List<HighscoreList> ReadFile(int wordlength) throws Exception {
         try {
             File file = new File("src/main/java/com/lingo/lingo/game/Resources/Highscore/highscore_"+wordlength+".csv");
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -28,9 +28,10 @@ public class ImportHighscoreFile implements ImportHighscoreFileInterface {
             return map;
 
         }
-        catch(Exception ec) {
+        catch(Exception e) {
+            e.printStackTrace();
+            throw new Exception("importeren van de HighscoreList is niet gelukt");
         }
-        return null;
     }
 
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public class ImportSortedWordFile implements ImportSortedWordFileInterface {
 
     //Import of the base word file depending on the amount of letters in the word.
-    public List ReadFile(int wordLength) {
+    public List ReadFile(int wordLength) throws Exception {
         try {
             File file = new File("src/main/java/com/lingo/lingo/game/Resources/filteredFiles/LingoList_"+wordLength);
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -19,9 +19,10 @@ public class ImportSortedWordFile implements ImportSortedWordFileInterface {
             return Wordlist;
 
         }
-        catch(Exception ec) {
+        catch(Exception e) {
+            e.printStackTrace();
+            throw new Exception("Importeren van de woordenlijst is niet gelukt");
         }
-        return null;
     }
 
 }

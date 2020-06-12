@@ -7,5 +7,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ImportSortedWordFileInterface {
-    List ReadFile(int wordLength);
+    List ReadFile(int wordLength) throws Exception;
 }

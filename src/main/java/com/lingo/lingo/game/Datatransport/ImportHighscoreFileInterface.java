@@ -10,5 +10,5 @@ import java.util.Collections;
 import java.util.List;
 
 public interface ImportHighscoreFileInterface {
-    List<HighscoreList> ReadFile(int wordlength);
+    List<HighscoreList> ReadFile(int wordlength) throws Exception;
 }

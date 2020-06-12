@@ -22,7 +22,7 @@ public class restController {
     }
 
     @GetMapping("/inputword/{length}")
-    public String inputWord(@PathVariable int length) {
+    public String inputWord(@PathVariable int length) throws Exception {
         JsonObject wordJson = new JsonObject();
         word = new Word(length);
         wordJson.addProperty("exactword", word.exactWord);
@@ -31,7 +31,7 @@ public class restController {
     }
 
     @GetMapping("/wordplay/{input}")
-    public String checkInput(@PathVariable String input) {
+    public String checkInput(@PathVariable String input) throws Exception {
         JsonArray checkJsonArray = new JsonArray();
         List<String> checkList = word.makePlay(input);
         for (int i = 0; i < checkList.size(); i+=1){
@@ -43,13 +43,13 @@ public class restController {
     }
 
     @GetMapping("/setHighscore/{name}/{score}/{time}/{length}")
-    public void setHighscore(@PathVariable String name, @PathVariable int score, @PathVariable int time, @PathVariable int length) {
+    public void setHighscore(@PathVariable String name, @PathVariable int score, @PathVariable int time, @PathVariable int length) throws Exception {
         HighscoreList newScore = new HighscoreList(name,score,time);
         newScore.exportHighscore(newScore,length);
     }
 
     @GetMapping("/highscore/{length}")
-    public String getHighscore(@PathVariable int length){
+    public String getHighscore(@PathVariable int length) throws Exception {
         JsonArray highscoreList = new JsonArray();
         HighscoreList highscoreListObject = new HighscoreList();
         List<HighscoreList> top10 = highscoreListObject.getTop10(length);

@@ -12,39 +12,33 @@ public class Word {
 	public int wordLength;
 	public String exactWord;
 	
-	public Word(int wordLength) {
+	public Word(int wordLength) throws Exception {
 		super();
 		this.wordLength = wordLength;
 		setWord(wordLength);
 	}
 	
-	public void setWord(int wordLength) {
-		ImportSortedWordFileInterface importSortedWordFileI = new ImportSortedWordFile();
-		List<String> wordList = importSortedWordFileI.ReadFile(wordLength);
-		int randomInteger = 0 + (int)(Math.random() * ((wordList.size() - 0) + 1));
-		exactWord = wordList.get(randomInteger);
+	public void setWord(int wordLength) throws Exception {
+		try {
+			ImportSortedWordFileInterface importSortedWordFileI = new ImportSortedWordFile();
+			List<String> wordList = importSortedWordFileI.ReadFile(wordLength);
+			int randomInteger = 0 + (int) (Math.random() * ((wordList.size() - 0) + 1));
+			exactWord = wordList.get(randomInteger);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception("Random woord kan niet uit de imported file bemachtigd worden");
+		}
 	}
 	
-	public List<String> makePlay(String userInput) {
-		CheckInputUserInterface checkInputUserI = new CheckInputUser();
-		List<String> checkList = checkInputUserI.checkWord(userInput, exactWord, wordLength);
-		String checkString = "";
-		for(String feedback : checkList) {
-			checkString += "["+feedback+"]";
-		}
-		String wordInPlay = "";
-		for(int i = 0; i < wordLength; i+=1) {
-			if(checkList.get(i).equals("correct")) {
-				wordInPlay += exactWord.charAt(i);
-			}
-			else {
-				wordInPlay += "_";
-			}
-		}
+	public List<String> makePlay(String userInput) throws Exception {
+		try {
+			CheckInputUserInterface checkInputUserI = new CheckInputUser();
+			List<String> checkList = checkInputUserI.checkWord(userInput, exactWord, wordLength);
 
-		System.out.println(checkString);
-		System.out.println(wordInPlay);
-
-		return checkList;
+			return checkList;
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception("Er kan geen play gemaakt worden vanuit de userInput.");
+		}
 	}
 }

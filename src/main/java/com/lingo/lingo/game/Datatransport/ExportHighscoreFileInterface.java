@@ -7,5 +7,5 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
 public interface ExportHighscoreFileInterface {
-    void exportHighscoreList(HighscoreList hg, int aantalLetters);
+    void exportHighscoreList(HighscoreList hg, int aantalLetters) throws Exception;
 }
