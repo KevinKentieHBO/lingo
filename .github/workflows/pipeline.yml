@@ -23,6 +23,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Send test to coveralls
-      run: mvn cobertura:cobertura coveralls:report
 
