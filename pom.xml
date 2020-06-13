@@ -23,7 +23,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<start-class>com.weblingo.Lingogame.LingogameApplication</start-class>
+		<start-class>com.lingo.lingo.LingoApplication</start-class>
 		<jacoco.version>0.8.3</jacoco.version>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
