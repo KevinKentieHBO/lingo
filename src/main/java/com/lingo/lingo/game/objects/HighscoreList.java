@@ -6,6 +6,8 @@ import com.lingo.lingo.game.Datatransport.ImportHighscoreFile;
 import com.lingo.lingo.game.Datatransport.ImportHighscoreFileInterface;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -47,17 +49,16 @@ public class HighscoreList implements Comparable<HighscoreList> {
 		ImportHighscoreFileInterface importHighscoreFileI = new ImportHighscoreFile();
 		try {
 			fullHighscoreList = importHighscoreFileI.ReadFile(wordLength);
-			List<HighscoreList> top10 = new ArrayList<HighscoreList>(fullHighscoreList.subList(fullHighscoreList.size() - 10, fullHighscoreList.size()));
+			Collections.sort(fullHighscoreList);
+			List<HighscoreList> top10 = new ArrayList<HighscoreList>();
+			for(int i = 0; i< 10; i++){
+				top10.add(fullHighscoreList.get(i));
+			}
 			return top10;
 		}catch(Exception e) {
 			logger.error(e + " :HighscoreList kan niet gesorteerd worden naar een top 10 lijst");
 			return null;
 		}
-	}
-
-	@Override
-	public int compareTo(HighscoreList o) {
-		return this.getPlayerScore() - o.getPlayerScore();
 	}
 
 	public Boolean exportHighscore(HighscoreList hs, int wordLength) throws Exception {
@@ -69,5 +70,11 @@ public class HighscoreList implements Comparable<HighscoreList> {
 			logger.error(e + " :Exporteren van de Highscore wordt niet mogelijk gemaakt door HighscoreList object");
 			return null;
 		}
+	}
+
+	@Override
+	public int compareTo(HighscoreList compareHi) {
+		int compareSco=((HighscoreList)compareHi).getPlayerScore();
+		return compareSco-this.playerScore;
 	}
 }

@@ -19,15 +19,10 @@ public class ImportHighscoreFile implements ImportHighscoreFileInterface {
             br = new BufferedReader(new FileReader(file));
             List<HighscoreList> map = new ArrayList<HighscoreList>();
             String st;
-            System.out.println("1");
             while ((st = br.readLine()) != null) {
                 String[] data = st.split(",");
                 map.add(new HighscoreList(data[0],Integer.parseInt(data[1]),Integer.parseInt(data[2])));
             }
-
-            Collections.sort(map, (d1, d2)-> {
-                return d2.getPlayerScore() - d1.getPlayerScore();
-            });
             return map;
 
         }
