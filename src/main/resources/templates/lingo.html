@@ -202,7 +202,7 @@
     };
 
     function identical(array) {
-        for(var i = 0; i < array.length - 1; i++) {
+        for(var i = 0; i < array.length; i++) {
             if(array[i]["value"]==("wrong") || array[i]["value"]==("wrong_place")) {
                 return false;
             }
@@ -210,9 +210,19 @@
         return true;
     }
 
+    function nonIdentical(array) {
+        var check = false;
+        for(var i = 0; i < array.length; i++) {
+            if(array[i]["value"]==("wrong") || array[i]["value"]==("wrong_place")) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
     function endGame(checkdata){
         console.log(checkdata)
-        if(turn == 6){
+        if(turn == 6 && nonIdentical(checkdata)){
             document.getElementById("guess").style.visibility='hidden';
             document.getElementById("beurtdiv").style.visibility='hidden';
             document.getElementById("timerdiv").style.visibility='hidden';
