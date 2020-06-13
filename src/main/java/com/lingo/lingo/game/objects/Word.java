@@ -2,7 +2,6 @@ package com.lingo.lingo.game.objects;
 
 import java.util.List;
 
-import com.lingo.lingo.game.Datatransport.ExportHighscoreFile;
 import com.lingo.lingo.game.Datatransport.ImportSortedWordFile;
 import com.lingo.lingo.game.Datatransport.ImportSortedWordFileInterface;
 import com.lingo.lingo.game.logic.CheckInputUser;
