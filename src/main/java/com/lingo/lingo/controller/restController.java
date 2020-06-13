@@ -16,11 +16,6 @@ public class restController {
 
     Word word = null;
 
-    @GetMapping("/hello")
-    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
-    }
-
     @GetMapping("/inputword/{length}")
     public String inputWord(@PathVariable int length) throws Exception {
         JsonObject wordJson = new JsonObject();

@@ -22,7 +22,6 @@ public class ImportHighscoreFile implements ImportHighscoreFileInterface {
             System.out.println("1");
             while ((st = br.readLine()) != null) {
                 String[] data = st.split(",");
-                System.out.println(st.toString());
                 map.add(new HighscoreList(data[0],Integer.parseInt(data[1]),Integer.parseInt(data[2])));
             }
 
