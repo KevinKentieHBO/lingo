@@ -6,8 +6,11 @@ import java.io.FileReader;
 import java.util.*;
 
 import com.lingo.lingo.game.objects.HighscoreList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ImportHighscoreFile implements ImportHighscoreFileInterface {
+    private static final Logger logger = LogManager.getLogger(ImportHighscoreFile.class);
 
     public List<HighscoreList> ReadFile(int wordlength) throws Exception {
         BufferedReader br = null;
@@ -30,10 +33,12 @@ public class ImportHighscoreFile implements ImportHighscoreFileInterface {
 
         }
         catch(Exception e) {
-            e.printStackTrace();
-            throw new Exception("importeren van de HighscoreList is niet gelukt");
+            logger.error(e + " :importeren van de HighscoreList is niet gelukt");
+            return null;
         }finally {
-            br.close();
+            if (br != null) {
+                br.close();
+            }
         }
     }
 

@@ -2,13 +2,19 @@ package com.lingo.lingo.game.objects;
 
 import java.util.List;
 
+import com.lingo.lingo.game.Datatransport.ExportHighscoreFile;
 import com.lingo.lingo.game.Datatransport.ImportSortedWordFile;
 import com.lingo.lingo.game.Datatransport.ImportSortedWordFileInterface;
 import com.lingo.lingo.game.logic.CheckInputUser;
 import com.lingo.lingo.game.logic.CheckInputUserInterface;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Word {
-	
+
+	private static final Logger logger = LogManager.getLogger(Word.class);
+
 	public int wordLength;
 	public String exactWord;
 	
@@ -25,8 +31,7 @@ public class Word {
 			int randomInteger = 0 + (int) (Math.random() * ((wordList.size() - 0) + 1));
 			exactWord = wordList.get(randomInteger);
 		}catch(Exception e) {
-			e.printStackTrace();
-			throw new Exception("Random woord kan niet uit de imported file bemachtigd worden");
+			logger.error(e + " :Random woord kan niet uit de imported file bemachtigd worden");
 		}
 	}
 	
@@ -37,8 +42,8 @@ public class Word {
 
 			return checkList;
 		}catch(Exception e) {
-			e.printStackTrace();
-			throw new Exception("Er kan geen play gemaakt worden vanuit de userInput.");
+			logger.error(e + " :Er kan geen play gemaakt worden vanuit de userInput.");
+			return null;
 		}
 	}
 }

@@ -8,8 +8,13 @@ import com.lingo.lingo.game.Datatransport.ImportHighscoreFileInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class HighscoreList implements Comparable<HighscoreList> {
-	
+
+	private static final Logger logger = LogManager.getLogger(HighscoreList.class);
+
 	private String playerName;
 	private int playerScore;
 	private int highscoretime;
@@ -45,8 +50,8 @@ public class HighscoreList implements Comparable<HighscoreList> {
 			List<HighscoreList> top10 = new ArrayList<HighscoreList>(fullHighscoreList.subList(fullHighscoreList.size() - 10, fullHighscoreList.size()));
 			return top10;
 		}catch(Exception e) {
-			e.printStackTrace();
-			throw new Exception("HighscoreList kan niet gesorteerd worden naar een top 10 lijst");
+			logger.error(e + " :HighscoreList kan niet gesorteerd worden naar een top 10 lijst");
+			return null;
 		}
 	}
 
@@ -61,8 +66,8 @@ public class HighscoreList implements Comparable<HighscoreList> {
 			exportHighscoreFileI.exportHighscoreList(hs, wordLength);
 			return true;
 		}catch(Exception e) {
-			e.printStackTrace();
-			throw new Exception("Exporteren van de Highscore wordt niet mogelijk gemaakt door HighscoreList object");
+			logger.error(e + " :Exporteren van de Highscore wordt niet mogelijk gemaakt door HighscoreList object");
+			return null;
 		}
 	}
 }

@@ -5,8 +5,11 @@ import com.lingo.lingo.game.objects.HighscoreList;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ExportHighscoreFile implements ExportHighscoreFileInterface {
+    private static final Logger logger = LogManager.getLogger(ExportHighscoreFile.class);
 
     public void exportHighscoreList(HighscoreList hg, int aantalLetters) throws Exception {
         PrintWriter pw = null;
@@ -20,10 +23,11 @@ public class ExportHighscoreFile implements ExportHighscoreFileInterface {
 
         }
         catch(Exception e) {
-            e.printStackTrace();
-            throw new Exception("exporteren van de HighscoreList is niet gelukt");
+            logger.error(e + " :exporteren van de HighscoreList is niet gelukt");
         } finally {
-            pw.close();
+            if(pw != null) {
+                pw.close();
+            }
         }
     }
 
